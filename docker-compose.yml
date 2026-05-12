@@ -1,0 +1,221 @@
+name: masterbikes
+
+services:
+  mysql-cliente:
+    image: mysql:8.0
+    container_name: mysql-cliente
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root123
+      MYSQL_DATABASE: cliente_db
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_cliente_data:/var/lib/mysql
+
+  mysql-servicio-tecnico:
+    image: mysql:8.0
+    container_name: mysql-servicio-tecnico
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root123
+      MYSQL_DATABASE: servicio_tecnico_db
+    ports:
+      - "3307:3306"
+    volumes:
+      - mysql_servicio_tecnico_data:/var/lib/mysql
+
+  mysql-usuario:
+    image: mysql:8.0
+    container_name: mysql-usuario
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root123
+      MYSQL_DATABASE: usuario_db
+    ports:
+      - "3308:3306"
+    volumes:
+      - mysql_usuario_data:/var/lib/mysql
+
+  mysql-bicicleta:
+    image: mysql:8.0
+    container_name: mysql-bicicleta
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root123
+      MYSQL_DATABASE: bicicleta_db
+    ports:
+      - "3309:3306"
+    volumes:
+      - mysql_bicicleta_data:/var/lib/mysql
+
+  mysql-arriendo:
+    image: mysql:8.0
+    container_name: mysql-arriendo
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root123
+      MYSQL_DATABASE: arriendo_db
+    ports:
+      - "3310:3306"
+    volumes:
+      - mysql_arriendo_data:/var/lib/mysql
+
+  mysql-inventario:
+    image: mysql:8.0
+    container_name: mysql-inventario
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root123
+      MYSQL_DATABASE: inventario_db
+    ports:
+      - "3311:3306"
+    volumes:
+      - mysql_inventario_data:/var/lib/mysql
+
+  mysql-venta:
+    image: mysql:8.0
+    container_name: mysql-venta
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root123
+      MYSQL_DATABASE: venta_db
+    ports:
+      - "3312:3306"
+    volumes:
+      - mysql_venta_data:/var/lib/mysql
+
+  mysql-despacho:
+    image: mysql:8.0
+    container_name: mysql-despacho
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root123
+      MYSQL_DATABASE: despacho_db
+    ports:
+      - "3313:3306"
+    volumes:
+      - mysql_despacho_data:/var/lib/mysql
+
+  masterbikes-clientes:
+    build:
+      context: ./masterbike-vm
+    container_name: masterbikes-clientes
+    restart: always
+    depends_on:
+      - mysql-cliente
+    ports:
+      - "8081:8081"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql-cliente:3306/cliente_db?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: root123
+    
+  masterbikes-servicio-tecnico:
+    build:
+      context: ./masterbike-vm-atencion
+    container_name: masterbikes-servicio-tecnico
+    restart: always
+    depends_on:
+      - mysql-servicio-tecnico
+      - masterbikes-clientes
+    ports:
+      - "8082:8082"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql-servicio-tecnico:3306/servicio_tecnico_db?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: root123
+      CLIENTE_SERVICE_URL: http://masterbikes-clientes:8081
+
+  masterbikes-usuarios:
+    build:
+      context: ./masterbikes-usuarios
+    container_name: masterbikes-usuarios
+    restart: always
+    depends_on:
+      - mysql-usuario
+    ports:
+      - "8083:8083"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql-usuario:3306/usuario_db?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: root123
+
+  masterbikes-bicicletas:
+    build:
+      context: ./masterbikes-bicicletas
+    container_name: masterbikes-bicicletas
+    restart: always
+    depends_on:
+      - mysql-bicicleta
+    ports:
+      - "8084:8084"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql-bicicleta:3306/bicicleta_db?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: root123
+
+  masterbikes-arriendos:
+    build:
+      context: ./masterbikes-arriendos
+    container_name: masterbikes-arriendos
+    restart: always
+    depends_on:
+      - mysql-arriendo
+    ports:
+      - "8085:8085"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql-arriendo:3306/arriendo_db?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: root123
+
+  masterbikes-inventario:
+    build:
+      context: ./masterbikes-inventario
+    container_name: masterbikes-inventario
+    restart: always
+    depends_on:
+      - mysql-inventario
+    ports:
+      - "8086:8086"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql-inventario:3306/inventario_db?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: root123
+
+  masterbikes-ventas:
+    build:
+      context: ./masterbikes-ventas
+    container_name: masterbikes-ventas
+    restart: always
+    depends_on:
+      - mysql-venta
+    ports:
+      - "8087:8087"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql-venta:3306/venta_db?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: root123
+
+  masterbikes-despachos:
+    build:
+      context: ./masterbikes-despachos
+    container_name: masterbikes-despachos
+    restart: always
+    depends_on:
+      - mysql-despacho
+    ports:
+      - "8088:8088"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql-despacho:3306/despacho_db?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: root123
+volumes:
+  mysql_cliente_data:
+  mysql_servicio_tecnico_data:
+  mysql_usuario_data:
+  mysql_bicicleta_data:
+  mysql_arriendo_data:
+  mysql_inventario_data:
+  mysql_venta_data:
+  mysql_despacho_data:
