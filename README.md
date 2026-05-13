@@ -53,6 +53,25 @@ Para detenerlos y eliminar los volumenes de base de datos:
 docker compose down -v
 ```
 
+## Scripts de apoyo
+
+Los comandos repetitivos estan ordenados en la carpeta `scripts`.
+
+```powershell
+.\scripts\iniciar-todo.ps1
+.\scripts\estado.ps1
+.\scripts\probar-apis.ps1
+.\scripts\verificar-tablas.ps1
+.\scripts\ver-logs.ps1
+.\scripts\detener-todo.ps1
+```
+
+Para detener todo y eliminar los volumenes de MySQL:
+
+```powershell
+.\scripts\detener-todo.ps1 -Volumenes
+```
+
 ## Servicios y endpoints principales
 
 | Servicio | Base URL | Endpoints |
