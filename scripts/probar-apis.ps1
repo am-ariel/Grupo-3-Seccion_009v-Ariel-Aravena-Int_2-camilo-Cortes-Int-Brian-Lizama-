@@ -8,7 +8,9 @@ $apis = @(
     @{ Nombre = "Arriendos"; Url = "http://localhost:8085/api/v1/arriendos" },
     @{ Nombre = "Inventario"; Url = "http://localhost:8086/api/v1/inventario" },
     @{ Nombre = "Ventas"; Url = "http://localhost:8087/api/v1/ventas" },
-    @{ Nombre = "Despachos"; Url = "http://localhost:8088/api/v1/despachos" }
+    @{ Nombre = "Despachos"; Url = "http://localhost:8088/api/v1/despachos" },
+    @{ Nombre = "Pagos"; Url = "http://localhost:8089/api/v1/pagos" },
+    @{ Nombre = "Proveedores"; Url = "http://localhost:8090/api/v1/proveedores" }
 )
 
 foreach ($api in $apis) {

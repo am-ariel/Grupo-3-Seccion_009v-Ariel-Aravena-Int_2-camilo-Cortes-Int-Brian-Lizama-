@@ -1,0 +1,9 @@
+CREATE TABLE IF NOT EXISTS pago (
+    id BIGINT NOT NULL AUTO_INCREMENT,
+    id_venta BIGINT NOT NULL,
+    fecha_pago DATE NOT NULL,
+    monto DECIMAL(10,2) NOT NULL,
+    metodo VARCHAR(50) NOT NULL,
+    estado VARCHAR(50) NOT NULL,
+    PRIMARY KEY (id)
+);

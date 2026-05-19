@@ -8,7 +8,9 @@ $bases = @(
     @{ Servicio = "Arriendos"; Contenedor = "mysql-arriendo"; BaseDatos = "arriendo_db"; Tabla = "arriendo" },
     @{ Servicio = "Inventario"; Contenedor = "mysql-inventario"; BaseDatos = "inventario_db"; Tabla = "inventario" },
     @{ Servicio = "Ventas"; Contenedor = "mysql-venta"; BaseDatos = "venta_db"; Tabla = "venta" },
-    @{ Servicio = "Despachos"; Contenedor = "mysql-despacho"; BaseDatos = "despacho_db"; Tabla = "despacho" }
+    @{ Servicio = "Despachos"; Contenedor = "mysql-despacho"; BaseDatos = "despacho_db"; Tabla = "despacho" },
+    @{ Servicio = "Pagos"; Contenedor = "mysql-pago"; BaseDatos = "pago_db"; Tabla = "pago" },
+    @{ Servicio = "Proveedores"; Contenedor = "mysql-proveedor"; BaseDatos = "proveedor_db"; Tabla = "proveedor" }
 )
 
 foreach ($base in $bases) {

@@ -1,0 +1,12 @@
+package com.masterbikes.pagos;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class MasterBikesPagosApplication {
+
+    public static void main(String[] args) {
+        SpringApplication.run(MasterBikesPagosApplication.class, args);
+    }
+}

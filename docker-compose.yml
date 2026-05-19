@@ -97,6 +97,30 @@ services:
     volumes:
       - mysql_despacho_data:/var/lib/mysql
 
+  mysql-pago:
+    image: mysql:8.0
+    container_name: mysql-pago
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root123
+      MYSQL_DATABASE: pago_db
+    ports:
+      - "3314:3306"
+    volumes:
+      - mysql_pago_data:/var/lib/mysql
+
+  mysql-proveedor:
+    image: mysql:8.0
+    container_name: mysql-proveedor
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root123
+      MYSQL_DATABASE: proveedor_db
+    ports:
+      - "3315:3306"
+    volumes:
+      - mysql_proveedor_data:/var/lib/mysql
+
   masterbikes-clientes:
     build:
       context: ./masterbike-vm
@@ -210,6 +234,34 @@ services:
       SPRING_DATASOURCE_URL: jdbc:mysql://mysql-despacho:3306/despacho_db?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
       SPRING_DATASOURCE_USERNAME: root
       SPRING_DATASOURCE_PASSWORD: root123
+
+  masterbikes-pagos:
+    build:
+      context: ./masterbikes-pagos
+    container_name: masterbikes-pagos
+    restart: always
+    depends_on:
+      - mysql-pago
+    ports:
+      - "8089:8089"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql-pago:3306/pago_db?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: root123
+
+  masterbikes-proveedores:
+    build:
+      context: ./masterbikes-proveedores
+    container_name: masterbikes-proveedores
+    restart: always
+    depends_on:
+      - mysql-proveedor
+    ports:
+      - "8090:8090"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql-proveedor:3306/proveedor_db?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: root123
 volumes:
   mysql_cliente_data:
   mysql_servicio_tecnico_data:
@@ -219,3 +271,5 @@ volumes:
   mysql_inventario_data:
   mysql_venta_data:
   mysql_despacho_data:
+  mysql_pago_data:
+  mysql_proveedor_data:

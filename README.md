@@ -1,6 +1,6 @@
 # MasterBike
 
-Proyecto de microservicios para la gestion de clientes, servicio tecnico, usuarios, bicicletas, arriendos, inventario, ventas y despachos de MasterBike.
+Proyecto de microservicios para la gestion de clientes, servicio tecnico, usuarios, bicicletas, arriendos, inventario, ventas, despachos, pagos y proveedores de MasterBike.
 
 ## Tecnologias
 
@@ -24,6 +24,8 @@ Proyecto de microservicios para la gestion de clientes, servicio tecnico, usuari
 | `masterbikes-inventario` | Inventario | 8086 |
 | `masterbikes-ventas` | Ventas | 8087 |
 | `masterbikes-despachos` | Despachos | 8088 |
+| `masterbikes-pagos` | Pagos | 8089 |
+| `masterbikes-proveedores` | Proveedores | 8090 |
 
 Cada microservicio tiene su propia base de datos MySQL y sus migraciones Flyway en `src/main/resources/db/migration`.
 
@@ -84,6 +86,8 @@ Para detener todo y eliminar los volumenes de MySQL:
 | Inventario | `http://localhost:8086/api/v1/inventario` | `GET /`, `GET /{id}`, `POST /`, `DELETE /{id}` |
 | Ventas | `http://localhost:8087/api/v1/ventas` | `GET /`, `GET /{id}`, `POST /`, `DELETE /{id}` |
 | Despachos | `http://localhost:8088/api/v1/despachos` | `GET /`, `GET /{id}`, `POST /`, `DELETE /{id}` |
+| Pagos | `http://localhost:8089/api/v1/pagos` | `GET /`, `GET /{id}`, `POST /`, `DELETE /{id}` |
+| Proveedores | `http://localhost:8090/api/v1/proveedores` | `GET /`, `GET /{id}`, `GET /rut/{rut}`, `POST /`, `DELETE /{id}` |
 
 ## Bases de datos
 
@@ -99,6 +103,8 @@ Docker Compose levanta una base de datos MySQL por servicio:
 | `mysql-inventario` | `inventario_db` | 3311 |
 | `mysql-venta` | `venta_db` | 3312 |
 | `mysql-despacho` | `despacho_db` | 3313 |
+| `mysql-pago` | `pago_db` | 3314 |
+| `mysql-proveedor` | `proveedor_db` | 3315 |
 
 Las credenciales configuradas para los servicios son:
 
