@@ -2,8 +2,10 @@ package com.masterbikes.proveedores.services;
 
 import com.masterbikes.proveedores.models.ProveedorModel;
 import com.masterbikes.proveedores.repositories.ProveedorRepository;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 import java.util.Optional;
@@ -31,6 +33,12 @@ public class ProveedorService {
     }
 
     public ProveedorModel guardar(ProveedorModel proveedor) {
+        proveedorRepository.findByRut(proveedor.getRut()).ifPresent(existente -> {
+            throw new ResponseStatusException(
+                    HttpStatus.CONFLICT,
+                    "Ya existe un proveedor con el rut: " + proveedor.getRut()
+            );
+        });
         return proveedorRepository.save(proveedor);
     }
 
