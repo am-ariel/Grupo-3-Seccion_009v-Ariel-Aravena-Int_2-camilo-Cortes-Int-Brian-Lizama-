@@ -1,12 +1,13 @@
 package com.masterbikes.inventario.services;
 
-import com.masterbikes.inventario.models.InventarioModel;
-import com.masterbikes.inventario.repositories.InventarioRepository;
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
-import java.util.Optional;
+import com.masterbikes.inventario.models.InventarioModel;
+import com.masterbikes.inventario.repositories.InventarioRepository;
 
 @Service
 @Transactional
@@ -32,5 +33,9 @@ public class InventarioService {
 
     public void eliminar(Long id) {
         inventarioRepository.deleteById(id);
+    }
+
+    public List<InventarioModel> obtenerPorAumento(Boolean aumento)
+    {return inventarioRepository.findByAumento(aumento);
     }
 }

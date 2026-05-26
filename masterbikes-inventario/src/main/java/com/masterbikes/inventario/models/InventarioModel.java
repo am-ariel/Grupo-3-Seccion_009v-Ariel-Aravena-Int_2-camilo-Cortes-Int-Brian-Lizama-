@@ -28,4 +28,8 @@ public class InventarioModel {
 
     @Column(name = "stock_minimo", nullable = false)
     private Integer stockMinimo;
+
+    @Column(name = "aumento",nullable = false)
+    private Boolean aumento;
+
 }

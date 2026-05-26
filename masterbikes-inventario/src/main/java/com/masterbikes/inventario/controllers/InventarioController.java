@@ -1,7 +1,8 @@
 package com.masterbikes.inventario.controllers;
 
-import com.masterbikes.inventario.models.InventarioModel;
-import com.masterbikes.inventario.services.InventarioService;
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,8 +12,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
-import java.util.Optional;
+import com.masterbikes.inventario.models.InventarioModel;
+import com.masterbikes.inventario.services.InventarioService;
 
 @RestController
 @RequestMapping("/api/v1/inventario")
@@ -46,4 +47,8 @@ public class InventarioController {
         inventarioService.eliminar(id);
         return ResponseEntity.noContent().build();
     }
+    @GetMapping("/aumento/{aumento}")
+    public ResponseEntity<List<InventarioModel>> obtenerPorAumento(@PathVariable Boolean aumento) {
+    return ResponseEntity.ok(inventarioService.obtenerPorAumento(aumento));
+}
 }
