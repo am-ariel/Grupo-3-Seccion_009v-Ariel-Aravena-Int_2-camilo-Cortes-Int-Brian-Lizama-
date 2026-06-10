@@ -144,7 +144,7 @@ services:
       - mysql-servicio-tecnico
       - masterbikes-clientes
     ports:
-      - "8092:8082"
+      - "8082:8082"
     environment:
       SPRING_DATASOURCE_URL: jdbc:mysql://mysql-servicio-tecnico:3306/servicio_tecnico_db?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
       SPRING_DATASOURCE_USERNAME: root

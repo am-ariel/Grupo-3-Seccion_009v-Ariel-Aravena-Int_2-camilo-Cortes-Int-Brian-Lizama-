@@ -44,6 +44,7 @@ public class OrdenServicioController {
 
     @PostMapping
     public ResponseEntity<OrdenServicioResponse> guardar(@Valid @RequestBody OrdenServicioRequest request) {
+        // El controller recibe la peticion; el service valida cliente remoto y guarda.
         return ResponseEntity.status(HttpStatus.CREATED).body(ordenServicioService.guardar(request));
     }
 

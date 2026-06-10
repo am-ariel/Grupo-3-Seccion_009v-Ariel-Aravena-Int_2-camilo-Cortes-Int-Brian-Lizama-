@@ -2,11 +2,14 @@ package com.masterbikes.ventas.controllers;
 
 import com.masterbikes.ventas.models.VentaModel;
 import com.masterbikes.ventas.services.VentaService;
+import jakarta.validation.Valid;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -37,8 +40,14 @@ public class VentaController {
     }
 
     @PostMapping
-    public ResponseEntity<VentaModel> guardar(@RequestBody VentaModel venta) {
-        return ResponseEntity.ok(ventaService.guardar(venta));
+    public ResponseEntity<VentaModel> guardar(@Valid @RequestBody VentaModel venta) {
+        // Venta registra el monto y queda disponible para que pagos la valide por Feign.
+        return ResponseEntity.status(HttpStatus.CREATED).body(ventaService.guardar(venta));
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<VentaModel> actualizar(@PathVariable Long id, @Valid @RequestBody VentaModel venta) {
+        return ResponseEntity.ok(ventaService.actualizar(id, venta));
     }
 
     @DeleteMapping("/{id}")

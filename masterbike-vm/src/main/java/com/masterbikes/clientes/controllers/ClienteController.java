@@ -2,6 +2,8 @@ package com.masterbikes.clientes.controllers;
 
 import com.masterbikes.clientes.models.ClienteModel;
 import com.masterbikes.clientes.services.ClienteService;
+import jakarta.validation.Valid;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -38,8 +40,14 @@ public class ClienteController {
     }
 
     @PostMapping
-    public ResponseEntity<ClienteModel> guardar(@RequestBody ClienteModel cliente) {
-        return ResponseEntity.ok(clienteService.guardar(cliente));
+    public ResponseEntity<ClienteModel> guardar(@Valid @RequestBody ClienteModel cliente) {
+        // El controller solo recibe la peticion y deja la logica al service.
+        return ResponseEntity.status(HttpStatus.CREATED).body(clienteService.guardar(cliente));
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<ClienteModel> actualizar(@PathVariable Long id, @Valid @RequestBody ClienteModel cliente) {
+        return ResponseEntity.ok(clienteService.actualizar(id, cliente));
     }
 
     @DeleteMapping("/{id}")

@@ -2,11 +2,14 @@ package com.masterbikes.despachos.controllers;
 
 import com.masterbikes.despachos.models.DespachoModel;
 import com.masterbikes.despachos.services.DespachoService;
+import jakarta.validation.Valid;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -37,8 +40,14 @@ public class DespachoController {
     }
 
     @PostMapping
-    public ResponseEntity<DespachoModel> guardar(@RequestBody DespachoModel despacho) {
-        return ResponseEntity.ok(despachoService.guardar(despacho));
+    public ResponseEntity<DespachoModel> guardar(@Valid @RequestBody DespachoModel despacho) {
+        // Despacho usa el id de venta para mantener referencia entre microservicios.
+        return ResponseEntity.status(HttpStatus.CREATED).body(despachoService.guardar(despacho));
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<DespachoModel> actualizar(@PathVariable Long id, @Valid @RequestBody DespachoModel despacho) {
+        return ResponseEntity.ok(despachoService.actualizar(id, despacho));
     }
 
     @DeleteMapping("/{id}")

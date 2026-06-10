@@ -78,16 +78,16 @@ Para detener todo y eliminar los volumenes de MySQL:
 
 | Servicio | Base URL | Endpoints |
 | --- | --- | --- |
-| Clientes | `http://localhost:8081/api/v1/clientes` | `GET /`, `GET /{id}`, `GET /rut/{rut}`, `POST /`, `DELETE /{id}` |
+| Clientes | `http://localhost:8081/api/v1/clientes` | `GET /`, `GET /{id}`, `GET /rut/{rut}`, `POST /`, `PUT /{id}`, `DELETE /{id}` |
 | Servicio tecnico | `http://localhost:8082/api/v1/ordenes-servicio` | `GET /`, `GET /{id}`, `GET /cliente/{idCliente}`, `POST /`, `PUT /{id}`, `DELETE /{id}` |
-| Usuarios | `http://localhost:8083/api/v1/usuarios` | `GET /`, `GET /{id}`, `POST /`, `DELETE /{id}` |
-| Bicicletas | `http://localhost:8084/api/v1/bicicletas` | `GET /`, `GET /{id}`, `POST /`, `DELETE /{id}` |
-| Arriendos | `http://localhost:8085/api/v1/arriendos` | `GET /`, `GET /{id}`, `POST /`, `DELETE /{id}` |
-| Inventario | `http://localhost:8086/api/v1/inventario` | `GET /`, `GET /{id}`, `POST /`, `DELETE /{id}` |
-| Ventas | `http://localhost:8087/api/v1/ventas` | `GET /`, `GET /{id}`, `POST /`, `DELETE /{id}` |
-| Despachos | `http://localhost:8088/api/v1/despachos` | `GET /`, `GET /{id}`, `POST /`, `DELETE /{id}` |
-| Pagos | `http://localhost:8089/api/v1/pagos` | `GET /`, `GET /{id}`, `POST /`, `DELETE /{id}` |
-| Proveedores | `http://localhost:8090/api/v1/proveedores` | `GET /`, `GET /{id}`, `GET /rut/{rut}`, `POST /`, `DELETE /{id}` |
+| Usuarios | `http://localhost:8083/api/v1/usuarios` | `GET /`, `GET /{id}`, `POST /`, `PUT /{id}`, `DELETE /{id}` |
+| Bicicletas | `http://localhost:8084/api/v1/bicicletas` | `GET /`, `GET /{id}`, `POST /`, `PUT /{id}`, `DELETE /{id}` |
+| Arriendos | `http://localhost:8085/api/v1/arriendos` | `GET /`, `GET /{id}`, `POST /`, `PUT /{id}`, `DELETE /{id}` |
+| Inventario | `http://localhost:8086/api/v1/inventario` | `GET /`, `GET /{id}`, `GET /aumento/{aumento}`, `POST /`, `PUT /{id}`, `DELETE /{id}` |
+| Ventas | `http://localhost:8087/api/v1/ventas` | `GET /`, `GET /{id}`, `POST /`, `PUT /{id}`, `DELETE /{id}` |
+| Despachos | `http://localhost:8088/api/v1/despachos` | `GET /`, `GET /{id}`, `POST /`, `PUT /{id}`, `DELETE /{id}` |
+| Pagos | `http://localhost:8089/api/v1/pagos` | `GET /`, `GET /{id}`, `POST /`, `PUT /{id}`, `DELETE /{id}` |
+| Proveedores | `http://localhost:8090/api/v1/proveedores` | `GET /`, `GET /{id}`, `GET /rut/{rut}`, `POST /`, `PUT /{id}`, `DELETE /{id}` |
 
 ## Bases de datos
 
@@ -118,3 +118,4 @@ Password: root123
 - El servicio tecnico depende del servicio de clientes mediante la variable `CLIENTE_SERVICE_URL`.
 - Los datos iniciales se cargan con migraciones Flyway.
 - Las carpetas `target`, `.vscode`, `.idea` y otros archivos locales estan excluidos por `.gitignore`.
+- Para preparar la exposicion, revisar `GUIA_DEFENSA.md`.
