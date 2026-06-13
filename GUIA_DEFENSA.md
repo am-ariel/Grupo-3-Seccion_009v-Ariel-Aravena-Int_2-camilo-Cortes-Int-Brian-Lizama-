@@ -97,3 +97,4 @@ Opciones simples:
 3. Agregar un `log.info` en un metodo del service.
 4. Modificar una regla simple, por ejemplo que inventario marque `aumento` solo cuando `stock < stockMinimo`.
 5. Probar un `PUT` en Postman para demostrar actualizacion.
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
