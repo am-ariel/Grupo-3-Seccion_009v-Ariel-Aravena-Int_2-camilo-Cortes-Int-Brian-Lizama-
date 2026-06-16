@@ -149,7 +149,6 @@ services:
       SPRING_DATASOURCE_URL: jdbc:mysql://mysql-servicio-tecnico:3306/servicio_tecnico_db?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
       SPRING_DATASOURCE_USERNAME: root
       SPRING_DATASOURCE_PASSWORD: root123
-      CLIENTE_SERVICE_URL: http://masterbikes-clientes:8081
 
   masterbikes-usuarios:
     build:
